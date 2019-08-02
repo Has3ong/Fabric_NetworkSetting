@@ -12,6 +12,8 @@ Ubuntun Version = 16.04.6
 
 Insert Ubuntu Netowrk Adapter
 
+<img width=600 src="https://user-images.githubusercontent.com/44635266/62383204-4341a280-b58a-11e9-80f6-85402e8302b2.png">
+
 ```
 $ ifconfig
 
