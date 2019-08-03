@@ -13,17 +13,20 @@ $ sudo vi /etc/hosts
 Install Sample
 
 ```
+$ cd ~/
 $ git clone https://github.com/Has3ong/Fabric_NetworkSetting.git
 
 $ cp -r ~/Fabric_NetworkSetting/Settings1/node1/test .
-```
 
-
-## Fabric Network Start
-
-```
 $ cd ~/test
+$ chmod +x Setting.sh CreateChannel.sh ChannelJoin.sh InstallChaincode.sh QueryChaincode.sh
+$ curl https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh | bash -s -- 1.4.0 1.4.0 -d -s
+$ cp ./bin/cryptogen ./bin/configtxgen ./bin/orderer ./bin/peer ./bin/configtxlator .
+```
 
+## 2. Fabric Network Start
+
+```
 $ ./Setting.sh
 
 org1.example.com
@@ -148,4 +151,18 @@ $ ./QueryChaincode.sh
 2019-08-02 22:18:14.910 KST [chaincodeCmd] checkChaincodeCmdParams -> INFO 002 Using default vscc
 
 100
+```
+
+## Docker Container Check
+
+```
+$ docker ps
+
+docker ps
+CONTAINER ID        IMAGE                                                                                                  COMMAND                  CREATED             STATUS              PORTS                    NAMES
+ecdfc5401bc3        dev-peer1.org1.example.com-mycc-1.0-cd123150154e6bf2df7ce682e0b1bcbea40499416f37a6da3aae14c4eb51b08d   "chaincode -peer.add…"   3 hours ago         Up 3 hours                                   dev-peer1.org1.example.com-mycc-1.0
+4896983eec71        dev-peer0.org1.example.com-mycc-1.0-384f11f484b9302df90b453200cfb25174305fce8f53f4e94d45ee3b6cab0ce9   "chaincode -peer.add…"   3 hours ago         Up 3 hours                                   dev-peer0.org1.example.com-mycc-1.0
+93994a6c8de5        hyperledger/fabric-peer:1.4.0                                                                          "peer node start"        3 hours ago         Up 3 hours          0.0.0.0:7051->7051/tcp   peer0.org1.example.com
+b1fe07f93505        hyperledger/fabric-peer:1.4.0                                                                          "peer node start"        3 hours ago         Up 3 hours          0.0.0.0:8051->8051/tcp   peer1.org1.example.com
+e58e481589eb        hyperledger/fabric-orderer:1.4.0                                                                       "orderer"                3 hours ago         Up 3 hours          0.0.0.0:7050->7050/tcp   orderer.example.com
 ```
