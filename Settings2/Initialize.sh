@@ -50,3 +50,15 @@ echo "##############################################"
 echo "             Fabric Binary"
 echo "##############################################"
 curl https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh | bash -s -- 1.4.0 1.4.0 -d -s
+
+echo "##############################################"
+echo "             Ubuntu Tree"
+echo "##############################################"
+apt-get install tree
+
+
+git clone https://github.com/Has3ong/Fabric_NetworkSetting.git
+
+wget https://raw.githubusercontent.com/hyperledger/fabric/release-1.4/scripts/bootstrap.sh
+chmod +x bootstrap.sh
+./bootstrap.sh -d -b
