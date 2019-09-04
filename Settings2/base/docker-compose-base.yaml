@@ -19,6 +19,21 @@ services:
         - orderer.example.com:/var/hyperledger/production/orderer
     ports:
       - 7050:7050
+    extra_hosts:
+      - "peer0.org1.example.com:192.168.56.102"
+      - "peer1.org1.example.com:192.168.56.102"
+      - "peer0.org2.example.com:192.168.56.103"
+      - "peer1.org2.example.com:192.168.56.103"
+      - "orderer0.example.com:192.168.56.104"
+      - "orderer1.example.com:192.168.56.105"
+      - "orderer2.example.com:192.168.56.106"
+      - "kafka0:192.168.56.104"
+      - "kafka1:192.168.56.105"
+      - "kafka2:192.168.56.106"
+      - "kafka3:192.168.56.106"
+      - "zookeeper0:192.168.56.104"
+      - "zookeeper1:192.168.56.105"
+      - "zookeeper2:192.168.56.106"
 
   peer0.org1.example.com:
     container_name: peer0.org1.example.com

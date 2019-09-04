@@ -20,7 +20,7 @@ services:
         image: hyperledger/fabric-zookeeper
         environment:
             - ZOO_MY_ID = 1
-            - ZOO_SERVERS=server.1=0.0.0.0:2888:3888 server.2=192.168.56.5:2888:3888 server.3=192.168.56.6:2888:3888
+            - ZOO_SERVERS=server.1=0.0.0.0:2888:3888 server.2=192.168.56.105:2888:3888 server.3=192.168.56.106:2888:3888
         ports:
             - 2181:2181
             - 2888:2888
@@ -28,15 +28,15 @@ services:
         networks:
             - byfn
         extra_hosts:
-            - zookeeper1:192.168.56.5
-            - zookeeper2:192.168.56.6
+            - zookeeper1:192.168.56.105
+            - zookeeper2:192.168.56.106
 
     kafka0:
         container_name: kafka0
         image: hyperledger/fabric-kafka
         environment:
             - KAFKA_BROKER_ID=0
-            - KAFKA_ADVERTISED_HOST_NAME=192.168.56.4
+            - KAFKA_ADVERTISED_HOST_NAME=192.168.56.104
             - KAFKA_ADVERTISED_PORT=9092
             - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
             - KAFKA_MESSAGE_MAX_BYTES=1048576
@@ -49,7 +49,7 @@ services:
         networks:
             - byfn
         extra_hosts:
-            - zookeeper1:192.168.56.5
-            - zookeeper2:192.168.56.6
+            - zookeeper1:192.168.56.105
+            - zookeeper2:192.168.56.106
         depends_on:
             - zookeeper0

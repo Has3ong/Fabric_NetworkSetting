@@ -10,35 +10,35 @@ Vagrant.configure("2") do |config|
         orgone.vm.box ="Org1"
         orgone.vm.box_url = OS_URL
         orgone.vm.host_name = "Org1"
-        orgone.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.2", :netmask => "255.255.255.0", :network => "192.168.56.0"
+        orgone.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.102", :netmask => "255.255.255.0", :network => "192.168.56.0"
     end
 
     config.vm.define:"Org2" do |orgtwo|
         orgtwo.vm.box ="Org2"
         orgtwo.vm.box_url = OS_URL
         orgtwo.vm.host_name = "Org2"
-        orgtwo.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.3", :netmask => "255.255.255.0", :network => "192.168.56.0"
+        orgtwo.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.103", :netmask => "255.255.255.0", :network => "192.168.56.0"
     end
 
     config.vm.define:"Orderer1" do |ordererone|
         ordererone.vm.box ="Orderer1"
         ordererone.vm.box_url = OS_URL
         ordererone.vm.host_name = "Orderer1"
-        ordererone.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.4", :netmask => "255.255.255.0", :network => "192.168.56.0"
+        ordererone.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.104", :netmask => "255.255.255.0", :network => "192.168.56.0"
     end
 
     config.vm.define:"Orderer2" do |orderertwo|
         orderertwo.vm.box ="Orderer2"
         orderertwo.vm.box_url = OS_URL
         orderertwo.vm.host_name = "Orderer2"
-        orderertwo.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.5", :netmask => "255.255.255.0", :network => "192.168.56.0"
+        orderertwo.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.105", :netmask => "255.255.255.0", :network => "192.168.56.0"
     end
 
     config.vm.define:"Orderer3" do |ordererthree|
         ordererthree.vm.box ="Orderer3"
         ordererthree.vm.box_url = OS_URL
         ordererthree.vm.host_name = "Orderer3"
-        ordererthree.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.6", :netmask => "255.255.255.0", :network => "192.168.56.0"
+        ordererthree.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.106", :netmask => "255.255.255.0", :network => "192.168.56.0"
     end
 
     config.vm.provider :virtualbox do |vb|
