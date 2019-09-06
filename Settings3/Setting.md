@@ -69,13 +69,14 @@ Fabric_NetworkSetting  fabric-samples
 ```
 $ vagrant ssh node1
 
+vagrant@node1:~$ cd Network
 vagrant@node1:~$ ls
 
-bin  bootstrap.sh  Fabric_NetworkSetting  fabric-samples
+bin  bootstrap.sh  config  Fabric_NetworkSetting  fabric-samples
 
 $ mv fabric-samples/chaincode .
 $ cp -rf Fabric_NetworkSetting/Settings3/node1/* .
-$ rm -rf Fabric_NetworkSetting fabric-samples
+$ rm -rf Fabric_NetworkSetting fabric-samples bootstrap.sh
 ```
 
 ## 4. Node2 Setting
@@ -83,15 +84,17 @@ $ rm -rf Fabric_NetworkSetting fabric-samples
 ```
 $ vagrant ssh node2
 
+vagrant@node2:~$ cd Network
 vagrant@node2:~$ ls
 
-bin  bootstrap.sh  Fabric_NetworkSetting  fabric-samples 
+bin  bootstrap.sh  config  Fabric_NetworkSetting  fabric-samples
 
 $ mv fabric-samples/chaincode .
 $ cp -rf Fabric_NetworkSetting/Settings3/node2/* .
-$ rm -rf Fabric_NetworkSetting fabric-samples
+$ rm -rf Fabric_NetworkSetting fabric-samples bootstrap.sh
 ```
 
+## /etc/hosts Settings
 ```
 $ sudo vi /etc/hosts
 192.168.56.2	orderer.example.com

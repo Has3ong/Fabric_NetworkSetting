@@ -4,7 +4,7 @@
 
 ```
 $ FABRIC_CFG_PATH=$PWD
-$ rm
+$ CHANNEL_ID = "mychannel"
 
 $ ./bin/cryptogen generate --config=./crypto-config.yaml
 org1.example.com
@@ -80,6 +80,7 @@ d347462b0dfa        hyperledger/fabric-peer:1.4.0
 
 ```
 $ ./bin/cryptogen generate --config=./crypto-config.yaml
+$ CHANNEL_ID = "mychannel"
 
 org1.example.com
 org2.example.com
