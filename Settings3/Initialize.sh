@@ -49,4 +49,11 @@ cd Network
 echo "##############################################"
 echo "             Fabric Binary"
 echo "##############################################"
+
 curl https://raw.githubusercontent.com/hyperledger/fabric/master/scripts/bootstrap.sh | bash -s -- 1.4.0 1.4.0 -d -s
+
+wget https://raw.githubusercontent.com/hyperledger/fabric/release-1.4/scripts/bootstrap.sh
+sudo chmod +x bootstrap.sh
+./bootstrap.sh -d -b
+
+git clone https://github.com/Has3ong/Fabric_NetworkSetting.git

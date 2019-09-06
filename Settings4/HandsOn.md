@@ -17,9 +17,9 @@
 ## 1. Create certificate and channel artifacts
 
 ```
-$ export FABRIC_CFG_PATH=$PWD
-$ export CHANNEL_NAME=mychannel
-$ export ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
+$ FABRIC_CFG_PATH=$PWD
+$ CHANNEL_NAME=mychannel
+$ ORDERER_CA=/opt/gopath/src/github.com/hyperledger/fabric/peer/crypto/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem
 
 $ ./bin/cryptogen generate --config=./crypto-config.yaml
 org1.example.com

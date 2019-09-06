@@ -1,96 +1,102 @@
-## 1. Initalize node1 node2 host file
+## 1. Vagrant up
 
-Virtual Box Host Network Setting
-<img width="600" src="https://user-images.githubusercontent.com/44635266/64060634-ab77b880-cc0a-11e9-87f0-6a83fd392d10.png">
+#### Network Settings
 
-VM Network Setting
-<img width="600" src="https://user-images.githubusercontent.com/44635266/64060635-ac104f00-cc0a-11e9-9e0c-d37a9e31bcc4.png">
-
-Ubuntu 16.04(Server) Install
-
-* node1 VM - 192.168.56.2
-* node2 VM - 192.168.56.3
-```
-$ sudo vi /etc/network/interfaces
-# This file describes the network interfaces available on your system
-# and how to activate them. For more information, see interfaces(5).
-
-source /etc/network/interfaces.d/*
-
-# The loopback network interface
-auto lo
-iface lo inet loopback
-
-# The primary network interface
-auto enp0s3
-iface enp0s3 inet dhcp
-
-auto enp0s8
-iface enp0s8 inet static
-address 192.168.56.2
-netmask 255.255.255.0
-network 192.168.56.0
-```
-
-#### SSH Networking
+* node1 192.168.56.2
+* node2 192.168.56.3
 
 ```
-$ ssh node1@192.168.56.2
-The authenticity of host '192.168.56.2 (192.168.56.2)' can't be established.
-ECDSA key fingerprint is SHA256:tJpPmEWWdj2LCKyvljWDLJrAtCEKeWpd1G1uBHu7gf4.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added '192.168.56.2' (ECDSA) to the list of known hosts.
-node1@192.168.56.2's password:
-Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-142-generic x86_64)
+$ vagrant up node1 node2
 
- * Documentation:  https://help.ubuntu.com
- * Management:     https://landscape.canonical.com
- * Support:        https://ubuntu.com/advantage
-
-패키지 118개를  업데이트할 수 있습니다.
-76 업데이트는 보안 업데이트입니다.
-
-New release '18.04.2 LTS' available.
-Run 'do-release-upgrade' to upgrade to it.
-
-
-Last login: Sat Aug 31 16:32:43 2019
-node1@ubuntu:~$
+Bringing machine 'node1' up with 'virtualbox' provider...
+==> node1: Importing base box 'node1'...
+==> node1: Matching MAC address for NAT networking...
+==> node1: Setting the name of the VM: Settings4_node1_1567783473400_36835
+==> node1: Clearing any previously set network interfaces...
+==> node1: Preparing network interfaces based on configuration...
+    node1: Adapter 1: nat
+    node1: Adapter 2: hostonly
+==> node1: Forwarding ports...
+    node1: 22 (guest) => 2222 (host) (adapter 1)
+==> node1: Running 'pre-boot' VM customizations...
+==> node1: Booting VM...
+==> node1: Waiting for machine to boot. This may take a few minutes...
+    node1: SSH address: 127.0.0.1:2222
+    node1: SSH username: vagrant
+    node1: SSH auth method: private key
+    node1:
+    node1: Vagrant insecure key detected. Vagrant will automatically replace
+    node1: this with a newly generated keypair for better security.
+    node1:
+    node1: Inserting generated public key within guest...
+    node1: Removing insecure key from the guest if it's present...
+    node1: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> node1: Machine booted and ready!
+==> node1: Checking for guest additions in VM...
+    node1: The guest additions on this VM do not match the installed version of
+    node1: VirtualBox! In most cases this is fine, but in rare cases it can
+    node1: prevent things such as shared folders from working properly. If you see
+    node1: shared folder errors, please make sure the guest additions within the
+    node1: virtual machine match the version of VirtualBox you have installed on
+    node1: your host and reload your VM.
+    node1:
+    node1: Guest Additions Version: 5.1.38
+    node1: VirtualBox Version: 6.0
+==> node1: Setting hostname...
+==> node1: Configuring and enabling network interfaces...
+==> node1: Mounting shared folders...
+    node1: /vagrant => /Users/has3ong/Desktop/Github/Fabric_NetworkSetting/Settings4
+==> node1: Running provisioner: shell...
+    node1: Running: /var/folders/yq/4wxz887d6sb1xh2zqf9l4_100000gn/T/vagrant-shell20190907-11680-1gjjm9j.sh
 ```
 
-## 2. Install Docker
+## 2. Connet Vagrant
 
 ```
-$ sudo apt-get remove docker docker-engine docker.i
+$ vagrant ssh node1
 
-$ sudo apt-get install \
-apt-transport-https \
-ca-certificates \
-curl \
-software-properties-common
+vagrant@node1:~$ ls
+Network
 
-$ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+$ cd Network
+$ ls
 
-$ sudo add-apt-repository \
- "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
- $(lsb_release -cs) \
- stable"
-
-$ sudo apt-get update
-$ sudo apt-get install docker-ce
-
-$ sudo usermod -a -G docker $USER
-
-$ docker version
-
+Fabric_NetworkSetting  fabric-samples
 ```
 
-## 3. Install Docker Compose
-```
-$ sudo curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+## 3. Node1 Setting
 
-$ sudo chmod +x /usr/local/bin/docker-compose
-
-$ docker-compose --version
 ```
-## 4. Install Fabric
+$ vagrant ssh node1
+
+vagrant@node1:~$ ls
+
+bin  bootstrap.sh  Fabric_NetworkSetting  fabric-samples
+
+$ mv fabric-samples/chaincode .
+$ cp -rf Fabric_NetworkSetting/Settings3/node1/* .
+$ rm -rf Fabric_NetworkSetting fabric-samples
+```
+
+## 4. Node2 Setting
+
+```
+$ vagrant ssh node2
+
+vagrant@node2:~$ ls
+
+bin  bootstrap.sh  Fabric_NetworkSetting  fabric-samples 
+
+$ mv fabric-samples/chaincode .
+$ cp -rf Fabric_NetworkSetting/Settings3/node2/* .
+$ rm -rf Fabric_NetworkSetting fabric-samples
+```
+
+```
+$ sudo vi /etc/hosts
+192.168.56.2	orderer.example.com
+192.168.56.2	peer0.org1.example.com
+192.168.56.2	peer1.org1.example.com
+192.168.56.3	peer0.org2.example.com
+192.168.56.3	peer1.org2.example.com
+```

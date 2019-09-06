@@ -2,8 +2,7 @@
 
 ## Runtime Environment
 
-* Mac OS
-* Ubuntu16
+* ubuntu-16.04.6-server-amd64
 
 ## Settings1
 
@@ -40,3 +39,20 @@ Fabric RAFT Setting
 * Orderer 5
 * Peer 5
 * cli 1
+
+
+## Vagrant Install
+
+* Vagrant uses Virtualbox to manage the virtual dependencies. You can directly download virtualbox and install or use homebrew for it.
+```
+$ brew cask install virtualbox
+```
+* Now install Vagrant either from the website or use homebrew for installing it.
+```
+$ brew cask install vagrant
+```
+* Vagrant-Manager helps you manage all your virtual machines in one place directly from the menubar.
+
+```
+$ brew cask install vagrant-manager
+```
