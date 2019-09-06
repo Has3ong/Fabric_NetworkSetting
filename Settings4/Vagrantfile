@@ -1,0 +1,20 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+OS_NAME="ubuntu1606"
+OS_URL="https://cloud-images.ubuntu.com/xenial/current/xenial-server-cloudimg-amd64-vagrant.box"
+
+Vagrant.configure("2") do |config|
+    config.vm.provision "shell", path: "./Initialize.sh", args: ""
+    config.vm.define:"node1" do |orgone|
+        orgone.vm.box ="node1"
+        orgone.vm.box_url = OS_URL
+        orgone.vm.host_name = "node1"
+        orgone.vm.network "private_network", :dev => "enp0s8", :ip => "192.168.56.2", :netmask => "255.255.255.0", :network => "192.168.56.0"
+    end
+
+    config.vm.provider :virtualbox do |vb|
+        vb.customize ["modifyvm", :id, "--memory", "2048"]
+        vb.customize ["modifyvm", :id, "--cpus", "2"]
+    end
+end

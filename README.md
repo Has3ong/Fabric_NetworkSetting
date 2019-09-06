@@ -19,6 +19,8 @@ Fabric with Kafka Zookeeper Setting
 * VM 5
 * Orderer 3
 * Peer 4
+* Zookeeper 3
+* Kafka 4
 
 ## Settings3 
 
@@ -28,3 +30,7 @@ Fabric Network Setting
 * Orderer 1
 * Peer 4
 * cli 1
+
+## Settings4
+
+Fabric RAFT
