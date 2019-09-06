@@ -37,6 +37,7 @@ sudo apt-get update
 echo "##############################################"
 echo "                   Go Lang"
 echo "##############################################"
+sudo apt-get install golang-go -y
 sudo apt-get install golang -y
 sudo apt-get update
 
@@ -50,7 +51,6 @@ echo "##############################################"
 echo "             Fabric Binary"
 echo "##############################################"
 
-curl -sSL http://bit.ly/2ysbOFE | bash -s
 curl -sSL http://bit.ly/2ysbOFE | bash -s -- 2.0.0-alpha 2.0.0-alpha 0.4.15
 
 echo "##############################################"

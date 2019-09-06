@@ -3,6 +3,7 @@
 ## Runtime Environment
 
 * Mac OS
+* Ubuntu16
 
 ## Settings1
 
@@ -24,7 +25,7 @@ Fabric with Kafka Zookeeper Setting
 
 ## Settings3 
 
-Fabric Network Setting
+Fabric Multi Network Setting
 
 * VM 2
 * Orderer 1
@@ -33,4 +34,9 @@ Fabric Network Setting
 
 ## Settings4
 
-Fabric RAFT
+Fabric RAFT Setting
+
+* VM 1
+* Orderer 5
+* Peer 5
+* cli 1
