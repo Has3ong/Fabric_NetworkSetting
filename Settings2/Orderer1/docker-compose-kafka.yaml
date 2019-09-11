@@ -5,7 +5,7 @@ networks:
 
 services:
     zookeeper.example.com:
-        container_name: zookeeper0.example.com
+        container_name: zookeeper1.example.com
         image: hyperledger/fabric-zookeeper:$IMAGE_TAG
         environment:
             - ZOO_MY_ID = 1
@@ -20,17 +20,17 @@ services:
         networks:
             - byfn
         extra_hosts:
-            - "zookeeper1.example.com:192.168.56.5"
+            - "zookeeper0.example.com:192.168.56.4"
             - "zookeeper2.example.com:192.168.56.6"
 
     kafka.example.com:
-        container_name: kafka0.example.com
+        container_name: kafka1.example.com
         image: hyperledger/fabric-kafka:$IMAGE_TAG
         environment:
-            - KAFKA_BROKER_ID=0
+            - KAFKA_BROKER_ID=1
             - KAFKA_ADVERTISED_HOST_NAME=192.168.56.4
             - KAFKA_ADVERTISED_PORT=9092
-            - KAFKA_ZOOKEEPER_CONNECT=127.0.0.1:2181,192.168.56.5:2181,192.168.56.6:2181
+            - KAFKA_ZOOKEEPER_CONNECT=127.0.0.1:2181,192.168.56.4:2181,192.168.56.6:2181
             - KAFKA_ADVERTISED_LISTENRS=PLAINTEXT://127.0.0.1:9092
             - KAFKA_MESSAGE_MAX_BYTES=1048576
             - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576
@@ -45,8 +45,8 @@ services:
         networks:
             - byfn
         extra_hosts:
-            - "zookeeper0.example.com:0.0.0.0"
-            - "zookeeper1.example.com:192.168.56.5"
+            - "zookeeper0.example.com:192.168.56.4"
+            - "zookeeper1.example.com:0.0.0.0"
             - "zookeeper2.example.com:192.168.56.6"
         depends_on:
             - zookeeper.example.com
