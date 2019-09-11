@@ -16,6 +16,6 @@ services:
         extends:
             file:   base/docker-compose-base.yaml
             service: orderer.example.com
-        container_name: orderer1.example.com
+        container_name: orderer0.example.com
         networks:
             - byfn

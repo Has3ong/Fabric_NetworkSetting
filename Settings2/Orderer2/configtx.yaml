@@ -346,7 +346,7 @@ Profiles:
                 Brokers:
                 - kafka0.example.com:9092
                 - kafka1.example.com:9092
-                - kafka.example.com2:9092
+                - kafka2.example.com:9092
                 - kafka3.example.com:9093
 
             Organizations:
