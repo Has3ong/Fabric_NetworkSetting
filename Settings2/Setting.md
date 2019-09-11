@@ -16,14 +16,19 @@ vagrant up Org1 Org2 Orderer1 Orderer2 Orderer3
 ## 2. Connet Vagrant
 
 ```
-$ vagrant ssh node1
+$ vagrant ssh {Orderer1, Orderer2, Orderer3, Org1, Org2}
 
-vagrant@node1:~$ ls
+vagrant@:~$ ls
 Network
 
 $ cd Network
 $ ls
 
 Fabric_NetworkSetting  fabric-samples
-```
 
+$ sudo mv fabric-samples/chaincode .
+$ sudo mv Fabric_NetworkSetting/Settings2/{your VM name}/* .
+$ sudo rm -rf fabric-samples Fabric_NetworkSetting
+
+$ ls
+```

@@ -1,54 +1,18 @@
-# Copyright IBM Corp. All Rights Reserved.
-#
-# SPDX-License-Identifier: Apache-2.0
-#
+vagrant@Orderer1:~/Network$ docker ps
+CONTAINER ID        IMAGE                                 COMMAND                  CREATED             STATUS              PORTS                                                                    NAMES
+f9e248684d37        hyperledger/fabric-kafka:latest       "/docker-entrypoint.…"   7 minutes ago       Up 40 seconds       0.0.0.0:9092->9092/tcp, 9093/tcp                                         kafka0.example.com
+2a8e3e0d9b74        hyperledger/fabric-zookeeper:latest   "/docker-entrypoint.…"   7 minutes ago       Up 41 seconds       0.0.0.0:2181->2181/tcp, 0.0.0.0:2888->2888/tcp, 0.0.0.0:3888->3888/tcp   zookeeper0.example.com
+b7e123982513        hyperledger/fabric-orderer:latest     "orderer"                7 minutes ago       Up 41 seconds       0.0.0.0:7050->7050/tcp                                                   orderer0.example.com
 
+vagrant@Orderer2:~/Network$ docker ps
+CONTAINER ID        IMAGE                                 COMMAND                  CREATED              STATUS              PORTS                                                                    NAMES
+85bfea478e9d        hyperledger/fabric-kafka:latest       "/docker-entrypoint.…"   About a minute ago   Up 58 seconds       0.0.0.0:9092->9092/tcp, 9093/tcp                                         kafka1.example.com
+76b606a3a996        hyperledger/fabric-zookeeper:latest   "/docker-entrypoint.…"   About a minute ago   Up 58 seconds       0.0.0.0:2181->2181/tcp, 0.0.0.0:2888->2888/tcp, 0.0.0.0:3888->3888/tcp   zookeeper1.example.com
+44f6d9cd672a        hyperledger/fabric-orderer:latest     "orderer"                About a minute ago   Up 59 seconds       0.0.0.0:7050->7050/tcp                                                   orderer1.example.com
 
-# NOTE: This is not the way a Kafka cluster would normally be deployed in production, as it is not secure
-# and is not fault tolerant. This example is a toy deployment that is only meant to exercise the Kafka code path
-# of the ordering service.
-
-version: '2'
-
-networks:
-  byfn:
-
-services:
-  zookeeper.example.com:
-    container_name: zookeeper0.example.com
-    image: hyperledger/fabric-zookeeper:$IMAGE_TAG
-    environment:
-      - ZOO_SERVERS=server.1=0.0.0.0:2888:3888 server.2=zookeeper1.example.com:2888:3888 server.3=zookeeper2.example.com:2888:3888
-      - ZOO_MY_ID=2
-    networks:
-    - byfn
-    ports:
-      - 2181:2181
-      - 2888:2888
-      - 3888:3888
-    extra_hosts:
-      - "zookeeper0.example.com:0.0.0.0"
-      - "zookeeper1.example.com:192.168.56.5"
-      - "zookeeper2.example.com:192.168.56.6"
-
-  kafka.example.com:
-    container_name: kafka0.example.com
-    image: hyperledger/fabric-kafka:$IMAGE_TAG
-    depends_on:
-    - zookeeper.example.com
-    environment:
-      - KAFKA_BROKER_ID=1
-        # - KAFKA_ADVERTISED_HOST_NAME=0.0.0.0
-      - KAFKA_ZOOKEEPER_CONNECT=127.0.0.1:2181,192.168.56.5:2181,192.168.56.6:2181
-      - KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://127.0.0.1:9092
-      - KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR=1
-      - KAFKA_MESSAGE_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
-      - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576 # 1 * 1024 * 1024 B
-      - KAFKA_UNCLEAN_LEADER_ELECTION_ENABLE=false
-      - KAFKA_LOG_RETENTION_MS=-1
-      - KAFKA_MIN_INSYNC_REPLICAS=1
-      - KAFKA_DEFAULT_REPLICATION_FACTOR=1
-    ports:
-      - 9092:9092
-    networks:
-    - byfn
+vagrant@Orderer3:~/Network$ docker ps
+CONTAINER ID        IMAGE                                 COMMAND                  CREATED             STATUS              PORTS                                                                    NAMES
+da481647ff47        hyperledger/fabric-kafka:latest       "/docker-entrypoint.…"   5 minutes ago       Up 2 minutes        9092/tcp, 0.0.0.0:9093->9093/tcp                                         kafka3.example.com
+9fd2935cbe6f        hyperledger/fabric-kafka:latest       "/docker-entrypoint.…"   5 minutes ago       Up 2 minutes        0.0.0.0:9092->9092/tcp, 9093/tcp                                         kafka2.example.com
+6966d571f357        hyperledger/fabric-zookeeper:latest   "/docker-entrypoint.…"   5 minutes ago       Up 2 minutes        0.0.0.0:2181->2181/tcp, 0.0.0.0:2888->2888/tcp, 0.0.0.0:3888->3888/tcp   zookeeper2.example.com
+06c8791f3708        hyperledger/fabric-orderer:latest     "orderer"                5 minutes ago       Up 2 minutes        0.0.0.0:7050->7050/tcp                                                   orderer2.example.com

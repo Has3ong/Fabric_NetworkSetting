@@ -5,14 +5,17 @@ networks:
 
 services:
     zookeeper.example.com:
-        container_name: zookeeper1.example.com
+        container_name: zookeeper0.example.com
         image: hyperledger/fabric-zookeeper:$IMAGE_TAG
         environment:
-            - ZOO_MY_ID=2
-            - ZOO_SERVERS=server.1=zookeeper0.example.com:2888:3888 server.2=zookeeper1.example.com:2888:3888 server.3=zookeeper2.example.com:2888:3888
+            - ZOO_SERVERS=server.1=0.0.0.0:2888:3888 server.2=192.168.56.5:2888:3888 server.3=192.168.56.6:2888:3888
+#            - ZOO_SERVERS=server.1=zookeeper0.example.com:2888:3888 server.2=zookeeper1.example.com:2888:3888 server.3=zookeeper2.example.com:2888:3888
+            - ZOO_MY_ID=1
+            - ZOOKEEPER_CLIENT_PORT=32181
+            - ZOOKEEPER_TICK_TIM=2000
         volumes:
-            - /data/zookeeper1/data/:/data
-            - /data/zookeeper1/datalog/:/datalog
+            - /data/zookeeper0/data/:/data
+            - /data/zookeeper0/datalog/:/datalog
         ports:
             - 2181:2181
             - 2888:2888
@@ -20,17 +23,25 @@ services:
         networks:
             - byfn
         extra_hosts:
-            - "zookeeper0.example.com:192.168.56.4"
+            - "orderer0.example.com:0.0.0.0"
+            - "orderer1.example.com:192.168.56.5"
+            - "orderer2.example.com:192.168.56.6"
+            - "zookeeper0.example.com:0.0.0.0"
+            - "zookeeper1.example.com:192.168.56.5"
             - "zookeeper2.example.com:192.168.56.6"
+            - "kafka0.example.com:0.0.0.0"
+            - "kafka1.example.com:192.168.56.5"
+            - "kafka2.example.com:192.168.56.6"
+            - "kafka3.example.com:192.168.56.6"
 
     kafka.example.com:
-        container_name: kafka1.example.com
+        container_name: kafka0.example.com
         image: hyperledger/fabric-kafka:$IMAGE_TAG
         environment:
-            - KAFKA_BROKER_ID=1
+            - KAFKA_BROKER_ID=0
             - KAFKA_ADVERTISED_HOST_NAME=192.168.56.4
             - KAFKA_ADVERTISED_PORT=9092
-            - KAFKA_ZOOKEEPER_CONNECT=127.0.0.1:2181,192.168.56.4:2181,192.168.56.6:2181
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper0.example.com:2181,zookeeper1.example.com:2181,zookeeper2.example.com:2181
             - KAFKA_ADVERTISED_LISTENRS=PLAINTEXT://127.0.0.1:9092
             - KAFKA_MESSAGE_MAX_BYTES=1048576
             - KAFKA_REPLICA_FETCH_MAX_BYTES=1048576
@@ -38,15 +49,16 @@ services:
             - KAFKA_DEFAULT_REPLICATION_FACTOR=1
             - KAFKA_MIN_INSYNC_REPLICAS=1
         volumes:
-            - /data/kafka1/hsperfdata_root/:/tmp/hsperfdata_root
-            - /data/kafka1/kafka-logs/:/tmp/kafka-logs
+            - /data/kafka0/hsperfdata_root/:/tmp/hsperfdata_root
+            - /data/kafka0/kafka-logs/:/tmp/kafka-logs
         ports:
             - 9092:9092
+            - 9093:9093
         networks:
             - byfn
         extra_hosts:
-            - "zookeeper0.example.com:192.168.56.4"
-            - "zookeeper1.example.com:0.0.0.0"
+            - "zookeeper0.example.com:0.0.0.0"
+            - "zookeeper1.example.com:192.168.56.5"
             - "zookeeper2.example.com:192.168.56.6"
         depends_on:
             - zookeeper.example.com
