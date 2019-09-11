@@ -8,11 +8,11 @@ services:
         container_name: zookeeper2.example.com
         image: hyperledger/fabric-zookeeper:$IMAGE_TAG
         environment:
-            - ZOO_MY_ID = 3
+            - ZOO_MY_ID=3
             - ZOO_SERVERS=server.1=zookeeper0.example.com:2888:3888 server.2=zookeeper1.example.com:2888:3888 server.3=zookeeper2.example.com:2888:3888
         volumes:
-            - /data/zookeeper0/data/:/data
-            - /data/zookeeper0/datalog/:/datalog
+            - /data/zookeeper2/data/:/data
+            - /data/zookeeper2/datalog/:/datalog
         ports:
             - 2181:2181
             - 2888:2888

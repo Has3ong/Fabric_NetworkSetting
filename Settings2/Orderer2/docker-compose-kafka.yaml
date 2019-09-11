@@ -8,11 +8,11 @@ services:
         container_name: zookeeper1.example.com
         image: hyperledger/fabric-zookeeper:$IMAGE_TAG
         environment:
-            - ZOO_MY_ID = 1
+            - ZOO_MY_ID=2
             - ZOO_SERVERS=server.1=zookeeper0.example.com:2888:3888 server.2=zookeeper1.example.com:2888:3888 server.3=zookeeper2.example.com:2888:3888
         volumes:
-            - /data/zookeeper0/data/:/data
-            - /data/zookeeper0/datalog/:/datalog
+            - /data/zookeeper1/data/:/data
+            - /data/zookeeper1/datalog/:/datalog
         ports:
             - 2181:2181
             - 2888:2888
@@ -38,8 +38,8 @@ services:
             - KAFKA_DEFAULT_REPLICATION_FACTOR=1
             - KAFKA_MIN_INSYNC_REPLICAS=1
         volumes:
-            - /data/kafka0/hsperfdata_root/:/tmp/hsperfdata_root
-            - /data/kafka0/kafka-logs/:/tmp/kafka-logs
+            - /data/kafka1/hsperfdata_root/:/tmp/hsperfdata_root
+            - /data/kafka1/kafka-logs/:/tmp/kafka-logs
         ports:
             - 9092:9092
         networks:

@@ -8,7 +8,7 @@ services:
         container_name: zookeeper0.example.com
         image: hyperledger/fabric-zookeeper:$IMAGE_TAG
         environment:
-            - ZOO_MY_ID = 1
+            - ZOO_MY_ID=1
             - ZOO_SERVERS=server.1=zookeeper0.example.com:2888:3888 server.2=zookeeper1.example.com:2888:3888 server.3=zookeeper2.example.com:2888:3888
         volumes:
             - /data/zookeeper0/data/:/data
