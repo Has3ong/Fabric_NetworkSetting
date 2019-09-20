@@ -10,7 +10,7 @@ CC_SRC_PATH="github.com/chaincode/chaincode_example02/go/"
 
 setGlobals 0 2
 set -x
-peer channel fetch 0 ${CHANNEL_NAME}.block -o orderer.example.com:7050 -c $CHANNEL_NAME --tls --cafile $ORDERER_CA
+peer channel fetch 0 ${CHANNEL_NAME}.block -o orderer.example.com:7050 -c $CHANNEL_NAME
 set +x
 
 echo "Having all peers for org2 join the channel..."
@@ -27,7 +27,7 @@ set +x
 echo "Updating anchor peers for org2..."
 setGlobals 0 2
 set -x
-peer channel update -o orderer.example.com:7050 -c $CHANNEL_NAME - f ./${CORE_PEER_LOCALMSPID}anchors.tx --tls --cafile $ORDERER_CA
+peer channel update -o orderer.example.com:7050 -c $CHANNEL_NAME - f ./${CORE_PEER_LOCALMSPID}anchors.tx
 set +x
 
 echo "Installing chaincode on peer0.org2..."
