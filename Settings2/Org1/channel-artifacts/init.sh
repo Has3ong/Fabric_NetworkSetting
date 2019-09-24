@@ -10,8 +10,9 @@ CC_SRC_PATH="github.com/chaincode/chaincode_example02/go/"
 
 setGlobals 0 1
 set -x
+peer channel create -o orderer0.example.com:7050 -c $CHANNEL_NAME -f ${CHANNEL_NAME}.tx
 set +x
-peer channel create -o orderer.example.com:7050 -c $CHANNEL_NAME -f ${CHANNEL_NAME}.tx
+
 
 setGlobals 0 1
 set -x
@@ -25,7 +26,7 @@ set +x
 
 setGlobals 0 1
 set -x
-peer channel update -o orderer.example.com:7050 -c $CHANNEL_NAME - f ./${CORE_PEER_LOCALMSPID}anchors.tx
+peer channel update -o orderer0.example.com:7050 -c $CHANNEL_NAME - f ./${CORE_PEER_LOCALMSPID}anchors.tx
 set +x
 
 setGlobals 0 1
@@ -42,7 +43,7 @@ sleep 3
 
 setGlobals 0 1
 set -x
-Instantiate - peer chaincode instantiate -o orderer.example.com:7050 -C $CHANNEL_NAME -n mycc -l ${LANGUAGE} -v ${VERSION} -c '{"Args":["init","a","100","b","200"]}' -P "OR ('Org1MSP.peer','Org2MSP.peer')"
+peer chaincode instantiate -o orderer0.example.com:7050 -C $CHANNEL_NAME -n mycc -l ${LANGUAGE} -v ${VERSION} -c '{"Args":["init","a","100","b","200"]}' -P "OR ('Org1MSP.peer','Org2MSP.peer')"
 set +x
 sleep 3
 
